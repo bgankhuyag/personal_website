@@ -13,4 +13,6 @@ requirements-test.txt
 app.yaml
 main.py
 noxfile_config.py
-/static/images/
+/static/images/profile.JPG
+/static/images/background.jpg
+.gitignore
