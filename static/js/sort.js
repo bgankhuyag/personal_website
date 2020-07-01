@@ -212,11 +212,7 @@ function insertionSort(array){
 
 $(document).ready(function(obj){
   $("#bubbleSort").click(function(){
-    $("#bubbleSort").attr("disabled", true);
-    $("#insertionSort").attr("disabled", true);
-    $("#mergeSort").attr("disabled", true);
-    $("#heapSort").attr("disabled", true);
-    $("#quickSort").attr("disabled", true);
+    $("button").attr("disabled", true);
     var n = bars.length;
     console.log(bars);
     for (var i = 0; i < n; i++){
@@ -227,39 +223,23 @@ $(document).ready(function(obj){
   });
 
   $("#insertionSort").click(function(){
-    $("#bubbleSort").attr("disabled", true);
-    $("#insertionSort").attr("disabled", true);
-    $("#mergeSort").attr("disabled", true);
-    $("#heapSort").attr("disabled", true);
-    $("#quickSort").attr("disabled", true);
+    $("button").attr("disabled", true);
     var n = bars.length;
     insertionSort(bars);
   });
 
   $("#mergeSort").click(function(){
-    $("#bubbleSort").attr("disabled", true);
-    $("#insertionSort").attr("disabled", true);
-    $("#mergeSort").attr("disabled", true);
-    $("#heapSort").attr("disabled", true);
-    $("#quickSort").attr("disabled", true);
+    $("button").attr("disabled", true);
     bars = mergeSort(bars);
   });
 
   $("#quickSort").click(function(){
-    $("#bubbleSort").attr("disabled", true);
-    $("#insertionSort").attr("disabled", true);
-    $("#mergeSort").attr("disabled", true);
-    $("#heapSort").attr("disabled", true);
-    $("#quickSort").attr("disabled", true);
+    $("button").attr("disabled", true);
     bars = quickSort(bars);
   });
 
   $("#heapSort").click(function(){
-    $("#bubbleSort").attr("disabled", true);
-    $("#insertionSort").attr("disabled", true);
-    $("#mergeSort").attr("disabled", true);
-    $("#heapSort").attr("disabled", true);
-    $("#quickSort").attr("disabled", true);
+    $("button").attr("disabled", true);
     array_length = bars.length;
     for (var i = Math.floor(array_length / 2); i >= 0; i -= 1)      {
       heap_root(bars, i);
