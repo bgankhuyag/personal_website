@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+{% load static %}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://kit.fontawesome.com/540c4847ca.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  .header{
+    margin-bottom: 10px;
+    font-family: sans-serif;
+    color: #c9dfff;
+    background-color: #121d2e;
+    height: 50px;
+  }
+
+  .title{
+    float: right;
+    font-family: serif;
+  }
+
+  @media screen and (max-width: 242px){
+    .title{
+      display: none;
+    }
+  }
+
+  .grid{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    text-align: center;
+    padding-top: 20px;
+  }
+
+
+  .board-grid{
+    display: grid;
+    grid-template-columns: repeat(9, auto);
+    margin: 0px auto;
+    background-color: black;
+  }
+
+  .input{
+    text-align: center;
+    width: 4vw;
+    height: 4vw;
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield;
+  }
+
+  @media screen and (max-width: 584px){
+    .grid{
+      grid-template-columns: 1fr;
+    }
+    .input{
+      width: 9vw;
+      height: 9vw;
+    }
+    .board-grid{
+      grid-template-columns: repeat(9, 9vw);
+    }
+  }
+
+  @media screen and (max-width: 264px){
+    .input{
+      width: 24px;
+      height: 24px;
+    }
+    .board-grid{
+      grid-template-columns: repeat(9, 24px);
+    }
+  }
+
+  .controls{
+    text-align: center;
+    padding-top: 20px;
+  }
+
+  .messages p{
+    background-color: red;
+    color: white;
+    height: 50px;
+    border-radius: 10px;
+    width: 80%;
+    padding-top: 10px;
+    margin-left: 10%;
+    font-weight: bold;
+  }
+</style>
+
+<html>
+<head>
+  <link rel="shortcut icon" href="{% static 'images/favi.ico'%}" type="image/x-icon" />
+  <title>Sudoku Solver</title>
+  <nav class="navbar header">
+    <div>
+      <!-- <a href="{% url 'home'%}"><h4><i class="fas fa-home" style="color: white;"></i></h4></a> -->
+      <a href="{% url 'home'%}"><img src="{% static 'images/logo.png'%}" alt="logo" style="height: 35px; padding-left: 20px;"></a>
+    </div>
+    <div>
+      <h4 class="title">Sudoku Solver</h4>
+    </div>
+  </nav>
+</head>
+<body id="body">
+  <form action="{% url 'sudoku' %}" method="post" name="sudokuSolveForm">
+    {% csrf_token %}
+    <div class="grid">
+      <div class="board-grid">
+        {% for value in values %}
+        {% with row=forloop.counter0 %}
+        {% for num in value %}
+        {% with column=forloop.counter0 %}
+        <div class="grid-item" {% if column == 2 or column == 5 %} style="padding-right: 1vw;" {% endif %}>
+          <input type="number" onkeypress='validate(event)' max="9" min="1" name="{{row}}{{column}}" class="input" {% if num != 0 %} value="{{num}}" {% if solved %} disabled {% endif %} {% endif %} {% if row == 2 or row == 5 %} style="margin-bottom: 1vw;" {% endif %}>
+        </div>
+        {% endwith %}
+        {% endfor %}
+        {% endwith %}
+        {% endfor %}
+      </div>
+      <div class="controls">
+        {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+          <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <button type="submit" id="solve" class="btn btn-dark" {% if solved %} disabled {% endif %} style="width: 50%; margin-bottom: 20px;">Solve</button>
+        <a href="{% url 'sudoku' %}" class="btn btn-dark" style="width: 50%"><i class="fas fa-eraser"></i> Clear</a>
+      </div>
+    </div>
+  </form>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
+
+<script type="text/javascript">
+
+  $("input").change(function(){
+    var val = $(this).val();
+    console.log(val);
+    if (val.length > 1){
+      $(this).val($(this).val().substring(0, 1));
+    }
+  });
+
+  function validate(evt) {
+    var theEvent = evt || window.event;
+
+    // Handle paste
+    if (theEvent.type === 'paste') {
+        key = event.clipboardData.getData('text/plain');
+    } else {
+    // Handle key press
+        var key = theEvent.keyCode || theEvent.which;
+        key = String.fromCharCode(key);
+    }
+    var regex = /[1-9]|\./;
+    if( !regex.test(key) ) {
+      theEvent.returnValue = false;
+      if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
+</script>

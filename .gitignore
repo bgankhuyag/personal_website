@@ -1,0 +1,16 @@
+settings.py
+/env/
+/mysite/settings.py
+/mysite/asgi.py
+/mysite/wsgi.py
+/mysite/__pycache__/
+/staticfiles/
+/website/__pycache__/
+/website/__init__.py
+/website/migrations/
+requirements.txt
+requirements-test.txt
+app.yaml
+main.py
+noxfile_config.py
+/static/images/
