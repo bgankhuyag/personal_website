@@ -4,4 +4,4 @@
 <h1 align="center">
   My First Personal Website
 </h1>
-![website](https://raw.githubusercontent.com/bgankhuyag/personal_website/master/static/images/website.png)
+![website] (https://raw.githubusercontent.com/bgankhuyag/personal_website/master/static/images/website.png)
