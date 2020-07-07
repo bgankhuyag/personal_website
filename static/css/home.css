@@ -311,6 +311,24 @@ h3{
   }
 }
 
+@media screen and (max-height: 400px){
+  .nav-item{
+    padding: 5% 0 5% 0;
+  }
+}
+
+@media screen and (max-height: 300px){
+  #menu-items{
+    padding-bottom: 0px;
+  }
+}
+
+@media screen and (max-height: 240px){
+  .nav-item{
+    font-size: 5vh;
+  }
+}
+
 
 .nav-item:active{
   background-color: #1d3c6e;
