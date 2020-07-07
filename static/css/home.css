@@ -249,6 +249,9 @@ h3{
   .logo{
     margin-left: 2vw;
   }
+  .info{
+    display: none;
+  }
 }
 
 .menu-icon{
@@ -286,6 +289,7 @@ h3{
   width: 50vw;
   flex-direction: column;
   justify-content: space-around;
+  padding-bottom: 50px;
 }
 
 .nav-item{
@@ -327,12 +331,6 @@ h3{
 
 .info:active{
   color: #54ccff;
-}
-
-@media screen and (max-width: 289px){
-  .info{
-    display: none;
-  }
 }
 
 .about{
@@ -451,7 +449,7 @@ footer{
 .background img{
   height: 98vh;
   margin-top: -60px;
-  -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,1,1) 20%, rgba(0,0,0,0));
   mask-image: linear-gradient(to left, rgba(0,0,1,1) 20%, rgba(0,0,0,0));
 }
 
